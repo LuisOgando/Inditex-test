@@ -9,7 +9,7 @@ import lombok.Data;
 public class Size {
 
     @Id
-    private int id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", nullable = false)

@@ -12,9 +12,9 @@ import lombok.Data;
 public class Product {
 
     @Id
-    private int id;
+    private Long id;
 
     @Column(nullable = false)
-    private int sequence;
+    private Integer sequence;
 
 }

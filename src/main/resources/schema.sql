@@ -12,14 +12,14 @@
 
 DROP TABLE IF EXISTS product;
 CREATE TABLE product (
-    id INT NOT NULL,
+    id LONG NOT NULL,
     sequence INT NOT NULL,
     PRIMARY KEY (id)
 );
 
 DROP TABLE IF EXISTS size;
 CREATE TABLE size (
-    id INT NOT NULL,
+    id LONG NOT NULL,
     product_id INT NOT NULL,
     back_soon BOOLEAN NOT NULL,
     special BOOLEAN NOT NULL,
@@ -29,7 +29,7 @@ CREATE TABLE size (
 
 DROP TABLE IF EXISTS stock;
 CREATE TABLE stock (
-    size_id INT NOT NULL,
+    size_id LONG NOT NULL,
     quantity INT NOT NULL,
     PRIMARY KEY (size_id),
     FOREIGN KEY (size_id) REFERENCES size(id)
