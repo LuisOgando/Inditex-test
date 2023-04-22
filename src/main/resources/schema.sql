@@ -20,17 +20,17 @@ CREATE TABLE product (
 DROP TABLE IF EXISTS size;
 CREATE TABLE size (
     id INT NOT NULL,
-    productid INT NOT NULL,
-    backsoon BOOLEAN NOT NULL,
+    product_id INT NOT NULL,
+    back_soon BOOLEAN NOT NULL,
     special BOOLEAN NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (productid) REFERENCES product(id)
+    FOREIGN KEY (product_id) REFERENCES product(id)
 );
 
 DROP TABLE IF EXISTS stock;
 CREATE TABLE stock (
-    sizeid INT NOT NULL,
+    size_id INT NOT NULL,
     quantity INT NOT NULL,
-    PRIMARY KEY (sizeid),
-    FOREIGN KEY (sizeid) REFERENCES size(id)
+    PRIMARY KEY (size_id),
+    FOREIGN KEY (size_id) REFERENCES size(id)
 );
