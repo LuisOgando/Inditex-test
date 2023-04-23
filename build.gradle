@@ -21,6 +21,7 @@ repositories {
 
 ext {
 	map_struct_version = '1.4.2.Final'
+	easy_random_version = '4.3.0'
 }
 
 dependencies {
@@ -38,6 +39,10 @@ dependencies {
 	// Mapstruct
 	implementation "org.mapstruct:mapstruct:$map_struct_version"
 	annotationProcessor "org.mapstruct:mapstruct-processor:$map_struct_version"
+
+	// EasyRandom
+	testImplementation "org.jeasy:easy-random-core:$easy_random_version"
+
 
 }
 
