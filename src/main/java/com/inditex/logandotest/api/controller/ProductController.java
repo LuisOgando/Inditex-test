@@ -1,31 +1,28 @@
 package com.inditex.logandotest.api.controller;
 
-import com.inditex.logandotest.api.model.Product;
-import com.inditex.logandotest.api.repository.ProductRepository;
-import com.inditex.logandotest.api.service.GetProductSizes;
+import com.inditex.logandotest.api.service.ProductService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import java.util.Collections;
 
 @RestController
 @RequestMapping("/product")
 @AllArgsConstructor
 public class ProductController {
-
-    private final ProductRepository repository;
-    private final GetProductSizes getProductSizes;
+    private final ProductService service;
 
     @GetMapping()
-    private ResponseEntity<String> getAll(
-    ) {
-        List<Product> productList = repository.findAll();
-        var sizes =  getProductSizes.apply();
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    private ResponseEntity getAll() {
+        var products = service.getAll();
+        if (products.isEmpty()){
+            return ResponseEntity.ok(Collections.EMPTY_LIST);
+        } else {
+            return ResponseEntity.ok(ProductMapper.INSTANCE.map(products));
+        }
     }
 
 }
