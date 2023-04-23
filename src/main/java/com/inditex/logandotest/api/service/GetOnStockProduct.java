@@ -1,13 +1,13 @@
 package com.inditex.logandotest.api.service;
 
-import com.inditex.logandotest.api.repository.SizeRepository;
+import com.inditex.logandotest.api.model.Size;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
 
-public interface GetProductSizes {
-    Set<Long> apply();
+public interface GetOnStockProduct {
+    Set<Long> apply(List<Size> sizeList);
 }
 
 //La primera es cuando una talla está marcada como back soon, en este caso, aunque la talla
@@ -20,45 +20,42 @@ public interface GetProductSizes {
 //los dos grupos el producto no debe mostrarse.
 @Component
 @AllArgsConstructor
-class GetProductSizesImpl implements GetProductSizes {
-
-    private final SizeRepository repository;
+class GetOnStockProductImpl implements GetOnStockProduct {
 
     @Override
-    public Set<Long> apply() {
-        final var productSizesMap = new HashMap<Long, AvailableSize>();
-        final var sizeList = repository.findAll();
+    public Set<Long> apply(List<Size> sizeList) {
+        final var productSizesMap = new HashMap<Long, SizeInStock>();
 
         sizeList.stream()
                 .filter(size -> size.isBackSoon() || (size.getStock() != null && size.getStock().getQuantity() > 0))
                 .forEach(size -> {
-                    var availableSize = productSizesMap.get(size.getProduct().getId());
-                    if (availableSize == null) {
-                        availableSize = new AvailableSize();
+                    var sizeInStock = productSizesMap.get(size.getProduct().getId());
+                    if (sizeInStock == null) {
+                        sizeInStock = new SizeInStock();
                     }
                     if (size.isBackSoon() && !size.isSpecial()) {
-                        availableSize.setBackSoon(true);
+                        sizeInStock.setBackSoon(true);
                     } else if (size.isSpecial() &&
                             (size.getStock() != null && size.getStock().getQuantity() > 0)) {
-                        availableSize.setHasSpecialSize(true);
+                        sizeInStock.setHasSpecialSize(true);
                     } else if (!size.isSpecial() &&
                             (size.getStock() != null && size.getStock().getQuantity() > 0)) {
-                        availableSize.setHasNonSpecialSize(true);
+                        sizeInStock.setHasNonSpecialSize(true);
                     }
 
-                    productSizesMap.put(size.getProduct().getId(), availableSize);
+                    productSizesMap.put(size.getProduct().getId(), sizeInStock);
                 });
+
         return getResult(productSizesMap);
     }
 
-    private Set<Long> getResult(Map<Long, AvailableSize> productSizesMap) {
+    private Set<Long> getResult(Map<Long, SizeInStock> productSizesMap) {
         final var result = new HashSet<Long>();
-        productSizesMap.entrySet().forEach(productSizeEntry -> {
-            final var availableSize = productSizeEntry.getValue();
-            if (availableSize.isBackSoon) {
-                result.add(productSizeEntry.getKey());
-            } else if (availableSize.hasNonSpecialSize && availableSize.hasSpecialSize) {
-                result.add(productSizeEntry.getKey());
+        productSizesMap.forEach((key, sizeInStock) -> {
+            if (sizeInStock.isBackSoon) {
+                result.add(key);
+            } else if (sizeInStock.hasNonSpecialSize && sizeInStock.hasSpecialSize) {
+                result.add(key);
             }
         });
         return result;
