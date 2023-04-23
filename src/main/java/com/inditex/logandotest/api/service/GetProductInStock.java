@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.*;
 
-public interface GetOnStockProduct {
+public interface GetProductInStock {
     Set<Long> apply(List<Size> sizeList);
 }
 
@@ -20,7 +20,7 @@ public interface GetOnStockProduct {
 //los dos grupos el producto no debe mostrarse.
 @Component
 @AllArgsConstructor
-class GetOnStockProductImpl implements GetOnStockProduct {
+class GetProductInStockImpl implements GetProductInStock {
 
     @Override
     public Set<Long> apply(List<Size> sizeList) {

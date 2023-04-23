@@ -17,7 +17,7 @@ public interface ProductService {
 @AllArgsConstructor
 class ProductServiceImpl implements ProductService {
 
-    private GetOnStockProduct getOnStockProduct;
+    private GetProductInStock getProductInStock;
     private ProductRepository repository;
     private SizeRepository sizeRepository;
 
@@ -26,7 +26,7 @@ class ProductServiceImpl implements ProductService {
         var sizeList = sizeRepository.findAll();
         var onStockProductIds = Collections.EMPTY_SET;
         if (!sizeList.isEmpty()) {
-            onStockProductIds = getOnStockProduct.apply(sizeList);
+            onStockProductIds = getProductInStock.apply(sizeList);
         }
         return repository.findAllByIdInOrderBySequence(onStockProductIds);
     }
