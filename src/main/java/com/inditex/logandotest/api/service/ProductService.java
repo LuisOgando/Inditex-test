@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 public interface ProductService {
-    List<Product> getAll();
+    List<Product> findAll();
 }
 
 @Service
@@ -22,7 +22,7 @@ class ProductServiceImpl implements ProductService {
     private SizeRepository sizeRepository;
 
     @Override
-    public List<Product> getAll() {
+    public List<Product> findAll() {
         var sizeList = sizeRepository.findAll();
         var onStockProductIds = Collections.EMPTY_SET;
         if (!sizeList.isEmpty()) {

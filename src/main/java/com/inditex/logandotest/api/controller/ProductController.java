@@ -17,7 +17,7 @@ public class ProductController {
 
     @GetMapping()
     private ResponseEntity getAll() {
-        var products = service.getAll();
+        var products = service.findAll();
         if (products.isEmpty()) {
             return ResponseEntity.ok(Collections.EMPTY_LIST);
         } else {

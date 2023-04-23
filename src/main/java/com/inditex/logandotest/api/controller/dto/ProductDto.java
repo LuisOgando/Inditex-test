@@ -10,6 +10,6 @@ public class ProductDto {
     private Long id;
 
     @JsonProperty("sequence")
-    private Long sequence;
+    private Integer sequence;
 
 }
