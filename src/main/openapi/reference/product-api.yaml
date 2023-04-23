@@ -1,0 +1,48 @@
+openapi: 3.1.0
+x-stoplight:
+  id: bdo9lnzru9bhk
+info:
+  title: product-api
+  version: '1.0'
+  summary: Test Java / Gradle / Spring Boot (version 3) application.
+  contact:
+    name: Luis Ogando
+    email: logando1193@gmail.com
+servers:
+  - url: 'http://localhost:8080'
+paths:
+  /product:
+    parameters: []
+    get:
+      summary: ''
+      operationId: get-product
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductDto'
+      description: |-
+        Retrieve products information that has the following conditions:
+        The first is when a size is marked as back soon, in this case, although the size
+        does not have stock, the product must be shown the same, since it is a product that is going to
+        will be on sale again when stock comes back.
+        The second is when a product has "special" sizes, in this case the product only
+        will be visible if at least one special size and one non-special size are in stock (or marked
+        as back soon). If they only have stock (or are marked as back soon) sizes of one of
+        the two groups the product should not be displayed.
+components:
+  schemas:
+    ProductDto:
+      title: ProductDto
+      x-stoplight:
+        id: k8s74dgt8opzs
+      type: object
+      properties:
+        product_id:
+          type: integer
+        sequence:
+          type: integer
