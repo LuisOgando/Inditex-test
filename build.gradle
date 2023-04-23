@@ -19,6 +19,9 @@ repositories {
 	maven { url 'https://repo.spring.io/milestone' }
 }
 
+ext {
+	map_struct_version = '1.4.2.Final'
+}
 
 dependencies {
 	//core
@@ -31,6 +34,10 @@ dependencies {
 
 	//H2
 	runtimeOnly 'com.h2database:h2'
+
+	// Mapstruct
+	implementation "org.mapstruct:mapstruct:$map_struct_version"
+	annotationProcessor "org.mapstruct:mapstruct-processor:$map_struct_version"
 
 }
 
