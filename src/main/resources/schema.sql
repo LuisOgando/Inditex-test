@@ -9,15 +9,16 @@
 -- - stock.csv: fichero con los siguientes campos:
 -- o sizeId: identificador de talla.
 -- o quantity: unidades disponibles en almacén de dicha talla.
-
+DROP TABLE IF EXISTS stock;
+DROP TABLE IF EXISTS size;
 DROP TABLE IF EXISTS product;
+
 CREATE TABLE product (
     id LONG NOT NULL,
     sequence INT NOT NULL,
     PRIMARY KEY (id)
 );
 
-DROP TABLE IF EXISTS size;
 CREATE TABLE size (
     id LONG NOT NULL,
     product_id INT NOT NULL,
@@ -27,7 +28,6 @@ CREATE TABLE size (
     FOREIGN KEY (product_id) REFERENCES product(id)
 );
 
-DROP TABLE IF EXISTS stock;
 CREATE TABLE stock (
     size_id LONG NOT NULL,
     quantity INT NOT NULL,
