@@ -21,4 +21,7 @@ public class Size {
     @Column(nullable = false)
     private boolean special;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id", referencedColumnName = "size_id", nullable = false)
+    private Stock stock;
 }

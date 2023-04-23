@@ -11,10 +11,6 @@ public class Stock {
     @Id
     private Long sizeId;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "size_id", referencedColumnName = "id", nullable = false)
-    private Size size;
-
     @Column(nullable = false)
     private Integer quantity;
 
