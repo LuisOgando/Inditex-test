@@ -9,7 +9,5 @@ import java.util.Set;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
-    List<Product> findAll();
-
     List<Product> findAllByIdInOrderBySequence(Set<Long> ids);
 }
