@@ -1,0 +1,29 @@
+1. Estructuras de datos utilizadas en el algoritmo:
+Una vez realizado el problema del algoritmo de visibilidad, comenta qué estructuras de datos (Listas, Sets, etc) has seleccionado para resolverlo y porque las has considerado como las más adecuadas en cada caso.
+
+El algoritmo de visualización de productos se realizó en la implementación de la interface ​​`GetProductInStock`, básicamente utilicé  dos estructuras de datos principales: Map y Set.
+
+Opte por utilizar un HashMap en lugar de una lista porque es más eficiente para realizar búsquedas y actualizaciones de valores asociados a una Key, ya que el tiempo de búsqueda y acceso es constante. En este caso, cada Key es el ID de un producto, y cada valor es un objeto tipo `SizeInStock`, que almacena información sobre la disponibilidad de tallas para este producto. 
+
+En el método getResult(), el HashSet es utilizado para almacenar los IDs de los productos que cumplen con las condiciones necesarias para ser visualizados. Elegí un HashSet en lugar de una lista porque el conjunto de productos no debe tener duplicados. Además, la operación de agregar elementos a un HashSet tiene una complejidad constante, lo que lo hace más eficiente que agregar elementos a una lista.
+
+En resumen, se utilizan HashMap para almacenar información asociada a una clave y así pude evitar iterar usando loops anidados que agregarían un complejidad temporal mucho más alta, y HashSet para almacenar elementos únicos.
+
+
+
+   2. Complejidad temporal del algoritmo : 
+Una vez resuelto el algoritmo de visibilidad. ¿Qué complejidad temporal expresada en notación “O” crees que tiene? ¿Consideras que se podría mejorar de alguna manera?
+
+En el método `apply()`, realiza un filtrado y una operación de iteración sobre la lista, lo cual tiene una complejidad de tiempo de O(n).
+
+En cada iteración, se realiza una operación de acceso y actualización en el HashMap, lo cual tiene una complejidad de tiempo promedio de O(1). Por lo tanto, la complejidad temporal total de la función apply() es `O(n)`
+
+En el método getResult(), se realiza una iteración sobre el HashMap, lo cual tiene una complejidad de tiempo de O(m).
+
+En general, la complejidad temporal del código es lineal en función de la longitud de la lista de entrada, lo cual es bastante eficiente;
+
+O(n)
+
+No obstante, si la lista de entrada es muy grande, entonces el rendimiento del código podría verse comprometido. Para mejorar este algoritmo, podríamos utilizar el método Stream.collect() en lugar del método forEach(),  lo cual disminuiría la cantidad de iteraciones y procesamiento necesario.
+
+Al utilizar Stream.collect(), puede ser que el código se vuelve más legible, lo que puede mejorar la mantenibilidad del código a largo plazo.

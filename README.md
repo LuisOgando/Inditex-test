@@ -6,8 +6,9 @@ The project is a product query REST Service. It uses an in-memory database (H2) 
 
 Notes: All basic security is disabled.
 
-The test requirements are in the file `Prueba_Tecnica_Ecommerce_Inditex_002.pdf`
+The test requirements are in the file : `Prueba_Tecnica_Ecommerce_Inditex_002.pdf`
 
+The test answers are in the file : `Prueba_Tecnica_Ecommerce_Respuestas_LO.txt`
 
 ## How to Run
 
